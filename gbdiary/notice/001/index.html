@@ -1,0 +1,406 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>꼬박 클라우드 안내</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #f5f3ef;
+    color: #1a1a1a;
+    min-height: 100vh;
+    padding: 0 0 60px 0;
+  }
+
+  .header {
+    background: #1a1a1a;
+    color: #f5f3ef;
+    padding: 28px 24px 24px;
+    position: relative;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .close-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #f5f3ef;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .badge {
+    background: #e8c547;
+    color: #1a1a1a;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .header p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+  }
+
+  .mascot-area {
+    background: #2a2a2a;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .mascot-emoji {
+    font-size: 48px;
+    flex-shrink: 0;
+  }
+
+  .mascot-bubble {
+    background: #3a3a3a;
+    border-radius: 16px;
+    border-bottom-left-radius: 4px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+  }
+
+  .content {
+    padding: 0 20px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #999;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 28px 0 12px;
+  }
+
+  .qa-card {
+    background: #fff;
+    border-radius: 16px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+
+  .qa-question {
+    padding: 18px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+  }
+
+  .q-badge {
+    background: #1a1a1a;
+    color: #e8c547;
+    font-size: 12px;
+    font-weight: 700;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .q-text {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+    flex: 1;
+    color: #1a1a1a;
+  }
+
+  .qa-divider {
+    height: 1px;
+    background: #f0f0f0;
+    margin: 0 20px;
+  }
+
+  .qa-answer {
+    padding: 16px 20px 20px;
+    display: flex;
+    gap: 12px;
+  }
+
+  .a-badge {
+    background: #e8f4f0;
+    color: #2d8a6e;
+    font-size: 12px;
+    font-weight: 700;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .a-content {
+    flex: 1;
+  }
+
+  .a-text {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.7;
+  }
+
+  .highlight-box {
+    background: #f8f6f0;
+    border-left: 3px solid #e8c547;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 14px;
+    margin-top: 12px;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  .highlight-box strong {
+    color: #1a1a1a;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+
+  .feature-list {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.5;
+  }
+
+  .feature-icon {
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .price-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #1a1a1a;
+    color: #e8c547;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-top: 12px;
+  }
+
+  .green-box {
+    background: #f0f8f5;
+    border-radius: 10px;
+    padding: 14px;
+    margin-top: 12px;
+  }
+
+  .green-box-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    color: #444;
+    line-height: 1.5;
+    padding: 4px 0;
+  }
+
+  .green-dot {
+    width: 6px;
+    height: 6px;
+    background: #2d8a6e;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  .bottom-notice {
+    background: #1a1a1a;
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: 8px;
+    color: rgba(255,255,255,0.85);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .bottom-notice strong {
+    color: #e8c547;
+    display: block;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <span class="badge">NEW 업데이트</span>
+    <button class="close-btn">✕</button>
+  </div>
+  <h1>꼬박 클라우드가<br>출시됐어요 ☁️</h1>
+  <p>소중한 일기를 더 안전하게 지키는 방법</p>
+</div>
+
+<div class="mascot-area">
+  <div class="mascot-emoji">🐣</div>
+  <div class="mascot-bubble">
+    여러분의 일기를<br>더 잘 지켜드릴게요! 오래 기다리셨죠?
+  </div>
+</div>
+
+<div class="content">
+  <div class="section-label">자주 묻는 질문</div>
+
+  <!-- Q1 -->
+  <div class="qa-card">
+    <div class="qa-question">
+      <div class="q-badge">Q</div>
+      <div class="q-text">꼬박 클라우드가 뭔가요?</div>
+    </div>
+    <div class="qa-divider"></div>
+    <div class="qa-answer">
+      <div class="a-badge">A</div>
+      <div class="a-content">
+        <div class="a-text">꼬박일기만의 클라우드 서버에 일기를 백업하고, 필요할 때 언제든 복원할 수 있는 서비스예요.</div>
+        <div class="highlight-box">
+          <strong>🤔 왜 만들었냐고요?</strong>
+          기존 구글 드라이브 백업은 2~3년치 데이터를 백업하는 데 너무 오랜 시간이 걸리고, 저장 공간이 부족하다는 문의가 많았어요. iCloud 동기화도 실시간 지원이 안 되고 사용자 iCloud 용량을 사용하다 보니 불편함이 있었고요. 꼬박 클라우드는 이런 문제들을 해결하기 위해 만들어졌어요.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qa-card">
+    <div class="qa-question">
+      <div class="q-badge">Q</div>
+      <div class="q-text">꼭 구독해야 하나요?</div>
+    </div>
+    <div class="qa-divider"></div>
+    <div class="qa-answer">
+      <div class="a-badge">A</div>
+      <div class="a-content">
+        <div class="a-text">전혀 그렇지 않아요! 구독과 관계없이 아래 기능들은 모두 그대로 사용할 수 있어요.</div>
+        <div class="green-box">
+          <div class="green-box-item"><div class="green-dot"></div>일기는 항상 내 기기에 안전하게 저장돼요</div>
+          <div class="green-box-item"><div class="green-dot"></div>iCloud 동기화 사용 가능(Apple 기기 한정)</div>
+          <div class="green-box-item"><div class="green-dot"></div>구글 드라이브 백업 / 복원 사용 가능</div>
+          <div class="green-box-item"><div class="green-dot"></div>PDF 내보내기 사용 가능</div>
+        </div>
+        <div class="a-text" style="margin-top: 12px;">꼬박 클라우드는 더 빠르고 편리한 백업을 원하는 분들을 위한 선택지예요 😊</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qa-card">
+    <div class="qa-question">
+      <div class="q-badge">Q</div>
+      <div class="q-text">갑자기 로그인이 생긴 이유가 있나요?</div>
+    </div>
+    <div class="qa-divider"></div>
+    <div class="qa-answer">
+      <div class="a-badge">A</div>
+      <div class="a-content">
+        <div class="a-text">꼬박 클라우드 구독 서비스를 위해 로그인 기능이 추가됐어요.</div>
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-icon">✅</div>
+            로그인은 선택사항이에요. 로그인 없이도 기존처럼 앱을 사용할 수 있어요
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">✅</div>
+            꼬박 클라우드를 이용하려면 로그인이 필요해요
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qa-card">
+    <div class="qa-question">
+      <div class="q-badge">Q</div>
+      <div class="q-text">구독하면 어떤 점이 좋은가요?</div>
+    </div>
+    <div class="qa-divider"></div>
+    <div class="qa-answer">
+      <div class="a-badge">A</div>
+      <div class="a-content">
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-icon">⚡</div>
+            구글 드라이브보다 훨씬 빠른 백업 & 복원
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">💾</div>
+            내 iCloud / 구글 드라이브 용량을 사용하지 않아요
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🔒</div>
+            꼬박 클라우드 서버에 안전하게 보관돼요
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">📱</div>
+            새 기기로 바꿔도 빠르게 복원할 수 있어요
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-notice">
+    <strong>🐣 꼬박 Team의 한마디</strong>
+    소중한 일기는 항상 여러분 기기에 저장돼요. 꼬박 클라우드는 더 안심하고 싶은 분들을 위한 선택이에요. 앞으로도 더 좋은 꼬박일기가 되도록 노력할게요 💛
+  </div>
+
+</div>
+</body>
+</html>
