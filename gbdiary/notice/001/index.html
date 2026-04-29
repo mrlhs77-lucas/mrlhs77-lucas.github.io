@@ -1,406 +1,658 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>꼬박 클라우드 안내</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+  <meta charset="utf-8" />
+  <title>꼬박 클라우드 출시 안내</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <style>
+    /* ── Fonts ── */
+    @font-face { font-family:"Pretendard"; font-weight:400; font-display:swap;
+      src:url("../../fonts/Pretendard-Regular.woff2") format("woff2"),url("../../fonts/Pretendard-Regular.woff") format("woff"); }
+    @font-face { font-family:"Pretendard"; font-weight:500; font-display:swap;
+      src:url("../../fonts/Pretendard-Medium.woff2") format("woff2"),url("../../fonts/Pretendard-Medium.woff") format("woff"); }
+    @font-face { font-family:"Pretendard"; font-weight:600; font-display:swap;
+      src:url("../../fonts/Pretendard-SemiBold.woff2") format("woff2"),url("../../fonts/Pretendard-SemiBold.woff") format("woff"); }
+    @font-face { font-family:"Pretendard"; font-weight:700; font-display:swap;
+      src:url("../../fonts/Pretendard-Bold.woff2") format("woff2"),url("../../fonts/Pretendard-Bold.woff") format("woff"); }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* ── Tokens ── */
+    :root {
+      --bg:        #F5F2EE;
+      --card:      #FFFFFF;
+      --orange:    #FF9500;
+      --orange-lt: #FFF3E0;
+      --text:      #1A1A1A;
+      --text-2:    #555555;
+      --text-3:    #999999;
+      --border:    #EBEBEB;
+      --blue-lt:   #e5f2ff;
+      --shadow:    0 2px 12px rgba(0,0,0,.07);
+      --r-card:    20px;
+      --r-pill:    8px;
+      --f: "Pretendard", -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    }
 
-  body {
-    font-family: 'Noto Sans KR', sans-serif;
-    background: #f5f3ef;
-    color: #1a1a1a;
-    min-height: 100vh;
-    padding: 0 0 60px 0;
-  }
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing:border-box; }
+    html, body { margin:0; padding:0; }
+    body {
+      font-family: var(--f);
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+    a { color:inherit; text-decoration:none; }
+    p { margin:0; }
 
-  .header {
-    background: #1a1a1a;
-    color: #f5f3ef;
-    padding: 28px 24px 24px;
-    position: relative;
-  }
+    /* ── Content wrapper ── */
+    .wrap {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 16px;
+      padding-bottom: calc(40px + env(safe-area-inset-bottom));
+    }
 
-  .header-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 16px;
-  }
+    /* ── Header ── */
+    .header {
+      background: var(--card);
+      border-radius: var(--r-card);
+      box-shadow: var(--shadow);
+      margin-top: 20px;
+      padding: 28px 24px 24px;
+    }
+    .header-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .badge {
+      background: var(--orange);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--r-pill);
+      letter-spacing: .02em;
+    }
+    .badge-date {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-3);
+    }
+    .header-body {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .header-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .header-copy { flex: 1; }
+    .header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+      letter-spacing: -.02em;
+      margin: 0 0 6px;
+    }
+    .header p {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-2);
+      line-height: 1.5;
+    }
 
-  .close-btn {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.15);
-    border: none;
-    color: #f5f3ef;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    /* ── Mascot area ── */
+    .mascot-area {
+      background: #d3eaff;
+      border: 1px solid #bddfff;
+      border-radius: var(--r-card);
+      padding: 18px 20px;
+      margin-top: 10px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .mascot-img-wrap {
+      width: 40px; height: 40px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      background: rgba(91,159,212,.15);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .mascot-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .mascot-img-placeholder {
+      font-size: 9px; font-weight: 600;
+      color: #5B9FD4;
+      text-align: center;
+      line-height: 1.3;
+      padding: 2px;
+    }
+    .mascot-bubble {
+      font-size: 15px;
+      font-weight: 500;
+      color: #18426c;
+      line-height: 1.4;
+      padding-top: 2px;
+    }
 
-  .badge {
-    background: #e8c547;
-    color: #1a1a1a;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 3px 8px;
-    border-radius: 20px;
-    letter-spacing: 0.5px;
-  }
+    /* ── Content ── */
+    .content { padding: 0; }
 
-  .header h1 {
-    font-size: 22px;
-    font-weight: 700;
-    line-height: 1.3;
-    margin-bottom: 8px;
-  }
+    /* ── Section label ── */
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-3);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin: 28px 0 10px 2px;
+    }
 
-  .header p {
-    font-size: 13px;
-    color: rgba(255,255,255,0.6);
-    line-height: 1.6;
-  }
+    /* ── QA cards ── */
+    .qa-list { display: flex; flex-direction: column; gap: 8px; }
 
-  .mascot-area {
-    background: #2a2a2a;
-    padding: 24px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
+    .qa-card {
+      background: var(--card);
+      border-radius: var(--r-card);
+      transition: box-shadow .2s ease;
+    }
 
-  .mascot-emoji {
-    font-size: 48px;
-    flex-shrink: 0;
-  }
+    .qa-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      text-align: left;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .q-badge {
+      width: 28px; height: 28px;
+      border-radius: 10px;
+      background: var(--orange-lt);
+      color: var(--orange);
+      font-size: 13px; font-weight: 700;
+      display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .q-text {
+      flex: 1;
+      font-size: 15px; font-weight: 600;
+      color: var(--text);
+      letter-spacing: -.01em;
+      line-height: 1.35;
+    }
+    .q-arrow {
+      width: 20px; height: 20px;
+      color: var(--text-3);
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+      flex-shrink: 0;
+    }
+    .qa-card.is-open .q-arrow { transform: rotate(180deg); }
 
-  .mascot-bubble {
-    background: #3a3a3a;
-    border-radius: 16px;
-    border-bottom-left-radius: 4px;
-    padding: 12px 16px;
-    font-size: 13px;
-    color: rgba(255,255,255,0.85);
-    line-height: 1.6;
-  }
+    .qa-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s ease;
+    }
 
-  .content {
-    padding: 0 20px;
-  }
+    .qa-divider { height: 1px; background: var(--border); margin: 0 20px; }
 
-  .section-label {
-    font-size: 11px;
-    font-weight: 700;
-    color: #999;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 28px 0 12px;
-  }
+    .a-row {
+      padding: 20px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .a-badge {
+      width: 28px; height: 28px;
+      border-radius: 10px;
+      background: var(--blue-lt);
+      color: #5B9FD4;
+      font-size: 13px; font-weight: 700;
+      display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .a-content {
+      flex: 1;
+      font-size: 14px; font-weight: 500;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+    .a-text {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
 
-  .qa-card {
-    background: #fff;
-    border-radius: 16px;
-    margin-bottom: 12px;
-    overflow: hidden;
-  }
+    .highlight-box {
+      background: var(--bg);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+    .highlight-box strong {
+      display: block;
+      font-size: 13px; font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
 
-  .qa-question {
-    padding: 18px 20px;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    cursor: pointer;
-  }
+    .feature-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .feature-item {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 14px; color: var(--text-2); line-height: 1.5;
+    }
+    .feature-icon {
+      width: 20px; height: 20px;
+      border-radius: 8px;
+      background: #E8F8EE;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .feature-icon svg { width:11px; height:11px; }
 
-  .q-badge {
-    background: #1a1a1a;
-    color: #e8c547;
-    font-size: 12px;
-    font-weight: 700;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
+    .note-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .note-item {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 14px; color: var(--text-2); line-height: 1.5;
+    }
+    .note-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
 
-  .q-text {
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 1.4;
-    flex: 1;
-    color: #1a1a1a;
-  }
+    .perk-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin-top: 0;
+    }
+    .perk-item {
+      background: var(--bg);
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex; flex-direction: row; align-items: center; gap: 10px;
+    }
+    .perk-icon { font-size: 18px; line-height: 1; flex-shrink: 0; }
+    .perk-text { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.35; }
 
-  .qa-divider {
-    height: 1px;
-    background: #f0f0f0;
-    margin: 0 20px;
-  }
+    /* ── Bottom notice ── */
+    .bottom-notice {
+      background: var(--card);
+      border-radius: var(--r-card);
+      padding: 20px;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .notice-img-wrap {
+      width: 44px; height: 44px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--orange-lt);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .notice-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .notice-img-placeholder {
+      font-size: 9px; font-weight: 600;
+      color: var(--orange);
+      text-align: center;
+      line-height: 1.3;
+      padding: 2px;
+    }
+    .notice-label { font-size: 11px; font-weight: 700; color: var(--orange); letter-spacing: .06em; margin-bottom: 6px; }
+    .notice-text { font-size: 14px; font-weight: 500; color: var(--text-2); line-height: 1.65; }
 
-  .qa-answer {
-    padding: 16px 20px 20px;
-    display: flex;
-    gap: 12px;
-  }
+    /* ── Tweaks ── */
+    #tweaks-panel {
+      display: none;
+      position: fixed;
+      bottom: 24px; right: 16px;
+      z-index: 100;
+      background: var(--card);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.18);
+      padding: 20px;
+      width: 240px;
+      font-size: 14px;
+      font-family: var(--f);
+    }
+    #tweaks-panel.is-visible { display: block; }
+    .tweaks-title { font-weight: 700; font-size: 15px; margin-bottom: 16px; color: var(--text); }
+    .tweak-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+    .tweak-row label { font-weight:500; color:var(--text-2); }
+    .tweak-row select,
+    .tweak-row input[type=color] { border:none; border-radius:8px; padding:4px 8px; font-size:13px; background:var(--bg); cursor:pointer; }
+    .tweak-row input[type=color] { width:36px; height:28px; padding:2px 4px; }
 
-  .a-badge {
-    background: #e8f4f0;
-    color: #2d8a6e;
-    font-size: 12px;
-    font-weight: 700;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
+    /* ══════════════════════════════════════
+       RESPONSIVE
+       ══════════════════════════════════════ */
 
-  .a-content {
-    flex: 1;
-  }
+    @media (min-width: 760px) {
+      .wrap { max-width: 760px; margin: 0 auto; }
+    }
 
-  .a-text {
-    font-size: 14px;
-    color: #444;
-    line-height: 1.7;
-  }
+    @media (min-width: 600px) {
+      .wrap { padding: 0 24px; padding-bottom: 56px; }
 
-  .highlight-box {
-    background: #f8f6f0;
-    border-left: 3px solid #e8c547;
-    border-radius: 0 8px 8px 0;
-    padding: 12px 14px;
-    margin-top: 12px;
-    font-size: 13px;
-    color: #555;
-    line-height: 1.6;
-  }
+      .header { padding: 32px 28px 28px; margin-top: 24px; }
+      .header-icon { width: 72px; height: 72px; border-radius: 20px; }
+      .header h1 { font-size: 26px; }
+      .header p { font-size: 15px; }
 
-  .highlight-box strong {
-    color: #1a1a1a;
-    display: block;
-    margin-bottom: 4px;
-    font-size: 13px;
-  }
+      .mascot-area { padding: 20px 24px; }
+      .mascot-img-wrap { width: 48px; height: 48px; }
+      .mascot-bubble { font-size: 16px; }
 
-  .feature-list {
-    margin-top: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
+      .qa-question { padding: 20px 24px; }
+      .q-text { font-size: 16px; }
+      .a-content { font-size: 15px; }
+      .a-text { font-size: 15px; }
+      .feature-item,
+      .note-item { font-size: 15px; }
+      .perk-grid { grid-template-columns: 1fr 1fr; }
+      .perk-item { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .perk-text { font-size: 14px; }
 
-  .feature-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    font-size: 13px;
-    color: #555;
-    line-height: 1.5;
-  }
+      .bottom-notice { padding: 24px; }
+      .notice-text { font-size: 15px; }
+    }
 
-  .feature-icon {
-    font-size: 14px;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
+    @media (min-width: 900px) {
+      .wrap { max-width: 760px; padding: 0 32px; padding-bottom: 80px; }
 
-  .price-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: #1a1a1a;
-    color: #e8c547;
-    font-size: 14px;
-    font-weight: 700;
-    padding: 6px 14px;
-    border-radius: 20px;
-    margin-top: 12px;
-  }
+      .header { margin-top: 32px; padding: 36px 36px 32px; }
+      .header-icon { width: 80px; height: 80px; border-radius: 22px; }
+      .header-body { gap: 20px; }
+      .header h1 { font-size: 30px; margin-bottom: 8px; }
+      .header p { font-size: 16px; }
+      .badge { font-size: 13px; padding: 3px 8px; }
+      .badge-date { font-size: 14px; }
 
-  .green-box {
-    background: #f0f8f5;
-    border-radius: 10px;
-    padding: 14px;
-    margin-top: 12px;
-  }
+      .mascot-area { padding: 24px 28px; margin-top: 12px; }
+      .mascot-img-wrap { width: 52px; height: 52px; }
+      .mascot-bubble { font-size: 17px; }
 
-  .green-box-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    font-size: 13px;
-    color: #444;
-    line-height: 1.5;
-    padding: 4px 0;
-  }
+      .section-label { font-size: 14px; margin: 36px 0 12px 2px; }
 
-  .green-dot {
-    width: 6px;
-    height: 6px;
-    background: #2d8a6e;
-    border-radius: 50%;
-    flex-shrink: 0;
-    margin-top: 6px;
-  }
+      .qa-list { gap: 10px; }
+      .qa-question { padding: 22px 28px; gap: 14px; }
+      .q-badge { width: 32px; height: 32px; border-radius: 12px; font-size: 14px; }
+      .q-text { font-size: 17px; }
+      .q-arrow { width: 22px; height: 22px; }
+      .qa-divider { margin: 0 28px; }
+      .a-row { padding: 20px 28px 28px; }
+      .a-badge { width: 32px; height: 32px; border-radius: 12px; font-size: 14px; }
+      .a-content { font-size: 16px; }
+      .a-text { font-size: 16px; }
+      .highlight-box { font-size: 15px; padding: 16px 18px; border-radius: 16px; }
+      .highlight-box strong { font-size: 15px; }
+      .feature-item,
+      .note-item { font-size: 16px; }
+      .feature-icon { width: 22px; height: 22px; border-radius: 9px; }
+      .feature-icon svg { width: 12px; height: 12px; }
+      .perk-item { padding: 16px 18px; border-radius: 16px; gap: 8px; }
+      .perk-icon { font-size: 22px; }
+      .perk-text { font-size: 15px; }
 
-  .bottom-notice {
-    background: #1a1a1a;
-    border-radius: 16px;
-    padding: 20px;
-    margin-top: 8px;
-    color: rgba(255,255,255,0.85);
-    font-size: 13px;
-    line-height: 1.7;
-  }
-
-  .bottom-notice strong {
-    color: #e8c547;
-    display: block;
-    font-size: 14px;
-    margin-bottom: 8px;
-  }
-</style>
+      .bottom-notice { padding: 28px; margin-top: 12px; gap: 16px; }
+      .notice-img-wrap { width: 52px; height: 52px; border-radius: 14px; }
+      .notice-label { font-size: 12px; margin-bottom: 4px; }
+      .notice-text { font-size: 16px; line-height: 1.45;}
+    }
+  </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="header-top">
-    <span class="badge">NEW 업데이트</span>
-    <button class="close-btn">✕</button>
-  </div>
-  <h1>꼬박 클라우드가<br>출시됐어요 ☁️</h1>
-  <p>소중한 일기를 더 안전하게 지키는 방법</p>
-</div>
+  <div class="wrap">
 
-<div class="mascot-area">
-  <div class="mascot-emoji">🐣</div>
-  <div class="mascot-bubble">
-    여러분의 일기를<br>더 잘 지켜드릴게요! 오래 기다리셨죠?
-  </div>
-</div>
-
-<div class="content">
-  <div class="section-label">자주 묻는 질문</div>
-
-  <!-- Q1 -->
-  <div class="qa-card">
-    <div class="qa-question">
-      <div class="q-badge">Q</div>
-      <div class="q-text">꼬박 클라우드가 뭔가요?</div>
-    </div>
-    <div class="qa-divider"></div>
-    <div class="qa-answer">
-      <div class="a-badge">A</div>
-      <div class="a-content">
-        <div class="a-text">꼬박일기만의 클라우드 서버에 일기를 백업하고, 필요할 때 언제든 복원할 수 있는 서비스예요.</div>
-        <div class="highlight-box">
-          <strong>🤔 왜 만들었냐고요?</strong>
-          기존 구글 드라이브 백업은 2~3년치 데이터를 백업하는 데 너무 오랜 시간이 걸리고, 저장 공간이 부족하다는 문의가 많았어요. iCloud 동기화도 실시간 지원이 안 되고 사용자 iCloud 용량을 사용하다 보니 불편함이 있었고요. 꼬박 클라우드는 이런 문제들을 해결하기 위해 만들어졌어요.
+    <!-- Header -->
+    <div class="header">
+      <div class="header-top">
+        <span class="badge">NEW</span>
+        <span class="badge-date">2026.04.22</span>
+      </div>
+      <div class="header-body">
+        <div class="header-copy">
+          <h1>꼬박 클라우드가 출시됐어요 ☁️</h1>
+          <p>소중한 일기를 더 안전하게 지키는 방법</p>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Q2 -->
-  <div class="qa-card">
-    <div class="qa-question">
-      <div class="q-badge">Q</div>
-      <div class="q-text">꼭 구독해야 하나요?</div>
-    </div>
-    <div class="qa-divider"></div>
-    <div class="qa-answer">
-      <div class="a-badge">A</div>
-      <div class="a-content">
-        <div class="a-text">전혀 그렇지 않아요! 구독과 관계없이 아래 기능들은 모두 그대로 사용할 수 있어요.</div>
-        <div class="green-box">
-          <div class="green-box-item"><div class="green-dot"></div>일기는 항상 내 기기에 안전하게 저장돼요</div>
-          <div class="green-box-item"><div class="green-dot"></div>iCloud 동기화 사용 가능(Apple 기기 한정)</div>
-          <div class="green-box-item"><div class="green-dot"></div>구글 드라이브 백업 / 복원 사용 가능</div>
-          <div class="green-box-item"><div class="green-dot"></div>PDF 내보내기 사용 가능</div>
-        </div>
-        <div class="a-text" style="margin-top: 12px;">꼬박 클라우드는 더 빠르고 편리한 백업을 원하는 분들을 위한 선택지예요 😊</div>
+    <!-- Mascot area -->
+    <div class="mascot-area">
+      <div class="mascot-img-wrap">
+        <!-- 이미지를 교체하려면 아래 img src를 변경하세요 -->
+        <img src="mascot-img.png" alt="마스코트 이미지" style="display:none;" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" />
+        <span class="mascot-img-placeholder" style="display:flex; align-items:center; justify-content:center; width:100%; height:100%;">이미지<br/>교체</span>
       </div>
+      <p class="mascot-bubble">여러분의 일기를 더 잘 지켜드릴게요!<br>오래 기다리셨죠? 💛</p>
     </div>
-  </div>
 
-  <!-- Q3 -->
-  <div class="qa-card">
-    <div class="qa-question">
-      <div class="q-badge">Q</div>
-      <div class="q-text">갑자기 로그인이 생긴 이유가 있나요?</div>
-    </div>
-    <div class="qa-divider"></div>
-    <div class="qa-answer">
-      <div class="a-badge">A</div>
-      <div class="a-content">
-        <div class="a-text">꼬박 클라우드 구독 서비스를 위해 로그인 기능이 추가됐어요.</div>
-        <div class="feature-list">
-          <div class="feature-item">
-            <div class="feature-icon">✅</div>
-            로그인은 선택사항이에요. 로그인 없이도 기존처럼 앱을 사용할 수 있어요
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">✅</div>
-            꼬박 클라우드를 이용하려면 로그인이 필요해요
+    <!-- Content -->
+    <div class="content">
+
+      <div class="section-label">자주 묻는 질문</div>
+      <div class="qa-list">
+
+        <div class="qa-card is-open" id="faq-1">
+          <button class="qa-question" onclick="toggleFaq('faq-1')" aria-expanded="true">
+            <span class="q-badge">Q</span>
+            <span class="q-text">꼬박 클라우드가 뭔가요?</span>
+            <svg class="q-arrow" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-divider"></div>
+            <div class="a-row">
+              <span class="a-badge">A</span>
+              <div class="a-content">
+                <p class="a-text">꼬박일기만의 클라우드 서버에 일기를 백업하고, 필요할 때 언제든 복원할 수 있는 서비스예요.</p>
+                <div class="highlight-box">
+                  <strong>🤔 왜 만들었냐고요?</strong>
+                  기존 구글 드라이브 백업은 2~3년치 데이터를 백업하는 데 너무 오랜 시간이 걸리고, iCloud 동기화도 실시간 지원이 안 되는 불편함이 있었어요. 꼬박 클라우드는 이런 문제들을 해결하기 위해 만들어졌어요.
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Q4 -->
-  <div class="qa-card">
-    <div class="qa-question">
-      <div class="q-badge">Q</div>
-      <div class="q-text">구독하면 어떤 점이 좋은가요?</div>
-    </div>
-    <div class="qa-divider"></div>
-    <div class="qa-answer">
-      <div class="a-badge">A</div>
-      <div class="a-content">
-        <div class="feature-list">
-          <div class="feature-item">
-            <div class="feature-icon">⚡</div>
-            구글 드라이브보다 훨씬 빠른 백업 & 복원
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">💾</div>
-            내 iCloud / 구글 드라이브 용량을 사용하지 않아요
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">🔒</div>
-            꼬박 클라우드 서버에 안전하게 보관돼요
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">📱</div>
-            새 기기로 바꿔도 빠르게 복원할 수 있어요
+        <div class="qa-card is-open" id="faq-2">
+          <button class="qa-question" onclick="toggleFaq('faq-2')" aria-expanded="true">
+            <span class="q-badge">Q</span>
+            <span class="q-text">꼭 구독해야 하나요?</span>
+            <svg class="q-arrow" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-divider"></div>
+            <div class="a-row">
+              <span class="a-badge">A</span>
+              <div class="a-content">
+                <p class="a-text">전혀 그렇지 않아요! 구독과 관계없이 아래 기능들은 모두 그대로 사용할 수 있어요.</p>
+                <div class="feature-list">
+                  <div class="feature-item">
+                    <span class="feature-icon"><svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#34C759" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                    <span>일기는 항상 내 기기에 안전하게 저장돼요</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon"><svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#34C759" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                    <span>iCloud 동기화 사용 가능 (Apple 기기 한정)</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon"><svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#34C759" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                    <span>구글 드라이브 백업 / 복원 사용 가능</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon"><svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#34C759" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                    <span>PDF 내보내기 사용 가능</span>
+                  </div>
+                </div>
+                <p class="a-text" style="margin-top:12px; font-size:13px; color:var(--text-3);">꼬박 클라우드는 더 빠르고 편리한 백업을 원하는 분들을 위한 선택지예요 😊</p>
+              </div>
+            </div>
           </div>
         </div>
+
+        <div class="qa-card is-open" id="faq-3">
+          <button class="qa-question" onclick="toggleFaq('faq-3')" aria-expanded="true">
+            <span class="q-badge">Q</span>
+            <span class="q-text">갑자기 로그인이 생긴 이유가 있나요?</span>
+            <svg class="q-arrow" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-divider"></div>
+            <div class="a-row">
+              <span class="a-badge">A</span>
+              <div class="a-content">
+                <p class="a-text">꼬박 클라우드 구독 서비스를 위해 로그인 기능이 추가됐어요.</p>
+                <div class="note-list">
+                  <div class="note-item">
+                    <span class="note-dot"></span>
+                    <span>로그인은 선택사항이에요. 로그인 없이도 기존처럼 앱을 사용할 수 있어요.</span>
+                  </div>
+                  <div class="note-item">
+                    <span class="note-dot"></span>
+                    <span>꼬박 클라우드를 이용하려면 로그인이 필요해요.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card is-open" id="faq-4">
+          <button class="qa-question" onclick="toggleFaq('faq-4')" aria-expanded="true">
+            <span class="q-badge">Q</span>
+            <span class="q-text">구독하면 어떤 점이 좋은가요?</span>
+            <svg class="q-arrow" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-divider"></div>
+            <div class="a-row">
+              <span class="a-badge">A</span>
+              <div class="a-content">
+                <div class="perk-grid">
+                  <div class="perk-item">
+                    <span class="perk-icon">⚡</span>
+                    <span class="perk-text">훨씬 빠른 백업 & 복원</span>
+                  </div>
+                  <div class="perk-item">
+                    <span class="perk-icon">💾</span>
+                    <span class="perk-text">내 드라이브 용량 사용 안 해요</span>
+                  </div>
+                  <div class="perk-item">
+                    <span class="perk-icon">🔒</span>
+                    <span class="perk-text">꼬박 서버에 안전하게 보관</span>
+                  </div>
+                  <div class="perk-item">
+                    <span class="perk-icon">📱</span>
+                    <span class="perk-text">새 기기에서도 빠르게 복원</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
-    </div>
-  </div>
 
-  <div class="bottom-notice">
-    <strong>🐣 꼬박 Team의 한마디</strong>
-    소중한 일기는 항상 여러분 기기에 저장돼요. 꼬박 클라우드는 더 안심하고 싶은 분들을 위한 선택이에요. 앞으로도 더 좋은 꼬박일기가 되도록 노력할게요 💛
-  </div>
+      <div class="section-label">꼬박 팀의 한마디</div>
+      <div class="bottom-notice">
+        <div class="notice-img-wrap">
+          <!-- 이미지를 교체하려면 아래 img src를 변경하세요 -->
+          <img src="kkobak-img.png" alt="꼬박 팀 이미지" style="display:none;" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" />
+          <span class="notice-img-placeholder" style="display:flex; align-items:center; justify-content:center; width:100%; height:100%;">이미지<br/>교체</span>
+        </div>
+        <div>
+          <div class="notice-label">KKOBAK TEAM</div>
+          <p class="notice-text">소중한 일기는 항상 여러분 기기에 저장돼요. 꼬박 클라우드는 더 안심하고 싶은 분들을 위한 선택이에요. 앞으로도 더 좋은 꼬박일기가 되도록 노력할게요 💛</p>
+        </div>
+      </div>
 
-</div>
+    </div><!-- /content -->
+
+  </div><!-- /wrap -->
+
+
+  <script>
+    function setFaqHeight(item, open) {
+      const body = item.querySelector('.qa-answer');
+      if (open) {
+        body.style.maxHeight = body.scrollHeight + 'px';
+        item.classList.add('is-open');
+        item.querySelector('.qa-question').setAttribute('aria-expanded', 'true');
+        // 애니메이션 끝나면 max-height 제한 해제 → 내부 높이 변화에도 잘리지 않음
+        body.addEventListener('transitionend', function onEnd() {
+          if (item.classList.contains('is-open')) body.style.maxHeight = 'none';
+          body.removeEventListener('transitionend', onEnd);
+        });
+      } else {
+        // none 상태에서 닫으려면 먼저 현재 실제 높이로 고정 후 0으로 전환
+        body.style.maxHeight = body.scrollHeight + 'px';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            body.style.maxHeight = '0';
+          });
+        });
+        item.classList.remove('is-open');
+        item.querySelector('.qa-question').setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    function toggleFaq(id) {
+      const item = document.getElementById(id);
+      const isOpen = item.classList.contains('is-open');
+      setFaqHeight(item, !isOpen);
+    }
+
+    document.querySelectorAll('.qa-card.is-open').forEach(item => {
+      const body = item.querySelector('.qa-answer');
+      body.style.maxHeight = 'none';
+    });
+
+    function applyTweak(v, val) {
+      document.documentElement.style.setProperty(v, val);
+      window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { [v]: val } }, '*');
+    }
+
+    window.addEventListener('message', e => {
+      if (e.data?.type === '__activate_edit_mode')   document.getElementById('tweaks-panel').classList.add('is-visible');
+      if (e.data?.type === '__deactivate_edit_mode') document.getElementById('tweaks-panel').classList.remove('is-visible');
+    });
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+  </script>
 </body>
 </html>
