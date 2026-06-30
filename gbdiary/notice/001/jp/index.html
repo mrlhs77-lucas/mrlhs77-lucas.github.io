@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>Moodie Cloud リリースのお知らせ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <style>
+    /* ── Fonts ── */
+    @font-face { font-family:"Pretendard"; font-weight:400; font-display:swap;
+      src:url("../../fonts/Pretendard-Regular.woff2") format("woff2"),url("../../fonts/Pretendard-Regular.woff") format("woff"); }
+    @font-face { font-family:"Pretendard"; font-weight:500; font-display:swap;
+      src:url("../../fonts/Pretendard-Medium.woff2") format("woff2"),url("../../fonts/Pretendard-Medium.woff") format("woff"); }
+    @font-face { font-family:"Pretendard"; font-weight:600; font-display:swap;
+      src:url("../../fonts/Pretendard-SemiBold.woff2") format("woff2"),url("../../fonts/Pretendard-SemiBold.woff") format("woff"); }
+    @font-face { font-family:"Pretendard"; font-weight:700; font-display:swap;
+      src:url("../../fonts/Pretendard-Bold.woff2") format("woff2"),url("../../fonts/Pretendard-Bold.woff") format("woff"); }
+
+    /* ── Tokens ── */
+    :root {
+      --bg:        #F5F2EE;
+      --card:      #FFFFFF;
+      --orange:    #FF9500;
+      --orange-lt: #FFF3E0;
+      --text:      #1A1A1A;
+      --text-2:    #555555;
+      --text-3:    #999999;
+      --border:    #EBEBEB;
+      --blue-lt:   #e5f2ff;
+      --shadow:    0 2px 12px rgba(0,0,0,.07);
+      --r-card:    20px;
+      --r-pill:    8px;
+      --f: "Pretendard", -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing:border-box; }
+    html, body { margin:0; padding:0; }
+    body {
+      font-family: var(--f);
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+    a { color:inherit; text-decoration:none; }
+    p { margin:0; }
+
+    /* ── Content wrapper ── */
+    .wrap {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 16px;
+      padding-bottom: calc(40px + env(safe-area-inset-bottom));
+    }
+
+    /* ── Header ── */
+    .header {
+      background: var(--card);
+      border-radius: var(--r-card);
+      box-shadow: var(--shadow);
+      margin-top: 20px;
+      padding: 28px 24px 24px;
+    }
+    .header-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .badge {
+      background: var(--orange);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--r-pill);
+      letter-spacing: .02em;
+    }
+    .badge-date {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-3);
+    }
+    .header-body {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .header-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .header-copy { flex: 1; }
+    .header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+      letter-spacing: -.02em;
+      margin: 0 0 6px;
+    }
+    .header p {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-2);
+      line-height: 1.5;
+    }
+
+    /* ── Mascot area ── */
+    .mascot-area {
+      background: #d3eaff;
+      border: 1px solid #bddfff;
+      border-radius: var(--r-card);
+      padding: 18px 20px;
+      margin-top: 10px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .mascot-img-wrap {
+      width: 40px; height: 40px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      background: rgba(91,159,212,.15);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .mascot-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .mascot-img-placeholder {
+      font-size: 9px; font-weight: 600;
+      color: #5B9FD4;
+      text-align: center;
+      line-height: 1.3;
+      padding: 2px;
+    }
+    .mascot-bubble {
+      font-size: 15px;
+      font-weight: 500;
+      color: #18426c;
+      line-height: 1.4;
+      padding-top: 2px;
+    }
+
+    /* ── Content ── */
+    .content { padding: 0; }
+
+    /* ── Section label ── */
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-3);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin: 28px 0 10px 2px;
+    }
+
+    /* ── QA cards ── */
+    .qa-list { display: flex; flex-direction: column; gap: 8px; }
+
+    .qa-card {
+      background: var(--card);
+      border-radius: var(--r-card);
+      transition: box-shadow .2s ease;
+    }
+
+    .qa-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      text-align: left;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .q-badge {
+      width: 28px; height: 28px;
+      border-radius: 10px;
+      background: var(--orange-lt);
+      color: var(--orange);
+      font-size: 13px; font-weight: 700;
+      display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .q-text {
+      flex: 1;
+      font-size: 15px; font-weight: 600;
+      color: var(--text);
+      letter-spacing: -.01em;
+      line-height: 1.35;
+    }
+    .q-arrow {
+      width: 20px; height: 20px;
+      color: var(--text-3);
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+      flex-shrink: 0;
+    }
+    .qa-card.is-open .q-arrow { transform: rotate(180deg); }
+
+    .qa-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s ease;
+    }
+
+    .qa-divider { height: 1px; background: var(--border); margin: 0 20px; }
+
+    .a-row {
+      padding: 20px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .a-badge {
+      width: 28px; height: 28px;
+      border-radius: 10px;
+      background: var(--blue-lt);
+      color: #5B9FD4;
+      font-size: 13px; font-weight: 700;
+      display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .a-content {
+      flex: 1;
+      font-size: 14px; font-weight: 500;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+    .a-text {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+
+    .highlight-box {
+      background: var(--bg);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+    .highlight-box strong {
+      display: block;
+      font-size: 13px; font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .feature-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .feature-item {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 14px; color: var(--text-2); line-height: 1.5;
+    }
+    .feature-icon {
+      width: 20px; height: 20px;
+      border-radius: 8px;
+      background: #E8F8EE;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .feature-icon svg { width:11px; height:11px; }
+
+    .note-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .note-item {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 14px; color: var(--text-2); line-height: 1.5;
+    }
+    .note-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+
+    .perk-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin-top: 0;
+    }
+    .perk-item {
+      background: var(--bg);
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex; flex-direction: row; align-items: center; gap: 10px;
+    }
+    .perk-icon { font-size: 18px; line-height: 1; flex-shrink: 0; }
+    .perk-text { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.35; }
+
+    /* ── Bottom notice ── */
+    .bottom-notice {
+      background: var(--card);
+      border-radius: var(--r-card);
+      padding: 20px;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .notice-img-wrap {
+      width: 44px; height: 44px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--orange-lt);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .notice-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .notice-img-placeholder {
+      font-size: 9px; font-weight: 600;
+      color: var(--orange);
+      text-align: center;
+      line-height: 1.3;
+      padding: 2px;
+    }
+    .notice-label { font-size: 11px; font-weight: 700; color: var(--orange); letter-spacing: .06em; margin-bottom: 6px; }
+    .notice-text { font-size: 14px; font-weight: 500; color: var(--text-2); line-height: 1.65; }
+
+    /* ── Tweaks ── */
+    #tweaks-panel {
+      display: none;
+      position: fixed;
+      bottom: 24px; right: 16px;
+      z-index: 100;
+      background: var(--card);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.18);
+      padding: 20px;
+      width: 240px;
+      font-size: 14px;
+      font-family: var(--f);
+    }
+    #tweaks-panel.is-visible { display: block; }
+    .tweaks-title { font-weight: 700; font-size: 15px; margin-bottom: 16px; color: var(--text); }
+    .tweak-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+    .tweak-row label { font-weight:500; color:var(--text-2); }
+    .tweak-row select,
+    .tweak-row input[type=color] { border:none; border-radius:8px; padding:4px 8px; font-size:13px; background:var(--bg); cursor:pointer; }
+    .tweak-row input[type=color] { width:36px; height:28px; padding:2px 4px; }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+       ══════════════════════════════════════ */
+
+    @media (min-width: 760px) {
+      .wrap { max-width: 760px; margin: 0 auto; }
+    }
+
+    @media (min-width: 600px) {
+      .wrap { padding: 0 24px; padding-bottom: 56px; }
+
+      .header { padding: 32px 28px 28px; margin-top: 24px; }
+      .header-icon { width: 72px; height: 72px; border-radius: 20px; }
+      .header h1 { font-size: 26px; }
+      .header p { font-size: 15px; }
+
+      .mascot-area { padding: 20px 24px; }
+      .mascot-img-wrap { width: 48px; height: 48px; }
+      .mascot-bubble { font-size: 16px; }
+
+      .qa-question { padding: 20px 24px; }
+      .q-text { font-size: 16px; }
+      .a-content { font-size: 15px; }
+      .a-text { font-size: 15px; }
+      .feature-item,
+      .note-item { font-size: 15px; }
+      .perk-grid { grid-template-columns: 1fr 1fr; }
+      .perk-item { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .perk-text { font-size: 14px; }
+
+      .bottom-notice { padding: 24px; }
+      .notice-text { font-size: 15px; }
+    }
+
+    @media (min-width: 900px) {
+      .wrap { max-width: 760px; padding: 0 32px; padding-bottom: 80px; }
+
+      .header { margin-top: 32px; padding: 36px 36px 32px; }
+      .header-icon { width: 80px; height: 80px; border-radius: 22px; }
+      .header-body { gap: 20px; }
+      .header h1 { font-size: 30px; margin-bottom: 8px; }
+      .header p { font-size: 16px; }
+      .badge { font-size: 13px; padding: 3px 8px; }
+      .badge-date { font-size: 14px; }
+
+      .mascot-area { padding: 24px 28px; margin-top: 12px; }
+      .mascot-img-wrap { width: 52px; height: 52px; }
+      .mascot-bubble { font-size: 17px; }
+
+      .section-label { font-size: 14px; margin: 36px 0 12px 2px; }
+
+      .qa-list { gap: 10px; }
+      .qa-question { padding: 22px 28px; gap: 14px; }
+      .q-badge { width: 32px; height: 32px; border-radius: 12px; font-size: 14px; }
+      .q-text { font-size: 17px; }
+      .q-arrow { width: 22px; height: 22px; }
+      .qa-divider { margin: 0 28px; }
+      .a-row { padding: 20px 28px 28px; }
+      .a-badge { width: 32px; height: 32px; border-radius: 12px; font-size: 14px; }
+      .a-content { font-size: 16px; }
+      .a-text { font-size: 16px; }
+      .highlight-box { font-size: 15px; padding: 16px 18px; border-radius: 16px; }
+      .highlight-box strong { font-size: 15px; }
+      .feature-item,
+      .note-item { font-size: 16px; }
+      .feature-icon { width: 22px; height: 22px; border-radius: 9px; }
+      .feature-icon svg { width: 12px; height: 12px; }
+      .perk-item { padding: 16px 18px; border-radius: 16px; gap: 8px; }
+      .perk-icon { font-size: 22px; }
+      .perk-text { font-size: 15px; }
+
+      .bottom-notice { padding: 28px; margin-top: 12px; gap: 16px; }
+      .notice-img-wrap { width: 52px; height: 52px; border-radius: 14px; }
+      .notice-label { font-size: 12px; margin-bottom: 4px; }
+      .notice-text { font-size: 16px; line-height: 1.45;}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="header-top">
+        <span class="badge">NEW</span>
+        <span class="badge-date">2026.05.28</span>
+      </div>
+      <div class="header-body">
+        <div class="header-copy">
+          <h1>Moodie Cloudがリリースされました ☁️</h1>
+          <p>大切な日記をもっと安全に守る方法</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mascot area -->
+    <div class="mascot-area">
+      <div class="mascot-img-wrap">
+        <img src="mascot-img.png" alt="マスコット画像" style="display:none;" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" />
+        <span class="mascot-img-placeholder" style="display:flex; align-items:center; justify-content:center; width:100%; height:100%;">画像<br/>差し替え</span>
+      </div>
+      <p class="mascot-bubble">皆さんの日記をもっとしっかり守りますね！<br>お待たせしました 💛</p>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+
+      <div class="section-label">気になることがあると思うので</div>
+      <div class="qa-list">
+
+        <div class="qa-card is-open" id="faq-1">
+          <button class="qa-question" onclick="toggleFaq('faq-1')" aria-expanded="true">
+            <span class="q-badge">Q</span>
+            <span class="q-text">Moodie Cloudって何ですか？</span>
+            <svg class="q-arrow" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-divider"></div>
+            <div class="a-row">
+              <span class="a-badge">A</span>
+              <div class="a-content">
+                <p class="a-text">Moodie専用のクラウドサーバーに日記をバックアップし、必要な時にいつでも復元できるサービスです。</p>
+                <div class="highlight-box">
+                  <strong>🤔 どうして作ったの？</strong>
+                  従来のGoogleドライブバックアップでは、2〜3年分のデータをバックアップするのに非常に長い時間がかかるという不便さがありました。Moodie Cloudはこの問題を解決するために作られました。
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card is-open" id="faq-2">
+          <button class="qa-question" onclick="toggleFaq('faq-2')" aria-expanded="true">
+            <span class="q-badge">Q</span>
+            <span class="q-text">必ず購読しないといけませんか？</span>
+            <svg class="q-arrow" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-divider"></div>
+            <div class="a-row">
+              <span class="a-badge">A</span>
+              <div class="a-content">
+                <p class="a-text">そんなことはありません！購読の有無にかかわらず、以下の機能はこれまで通りご利用いただけます。</p>
+                <div class="feature-list">
+                  <div class="feature-item">
+                    <span class="feature-icon"><svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#34C759" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                    <span>アプリを削除しない限り、日記は端末に安全に保存されます</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon"><svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#34C759" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                    <span>Googleドライブでのバックアップ・復元は引き続きご利用いただけます</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon"><svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#34C759" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                    <span>PDFエクスポートも引き続きご利用いただけます</span>
+                  </div>
+                </div>
+                <p class="a-text" style="margin-top:12px; font-size:13px; color:var(--text-3);">Moodie Cloudは、より速く便利なバックアップをご希望の方のための選択肢です 😊</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card is-open" id="faq-3">
+          <button class="qa-question" onclick="toggleFaq('faq-3')" aria-expanded="true">
+            <span class="q-badge">Q</span>
+            <span class="q-text">急にログインが表示されるようになったのはなぜですか？</span>
+            <svg class="q-arrow" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-divider"></div>
+            <div class="a-row">
+              <span class="a-badge">A</span>
+              <div class="a-content">
+                <p class="a-text">Moodie Cloudの購読サービスのため、ログイン機能が追加されました。</p>
+                <div class="note-list">
+                  <div class="note-item">
+                    <span class="note-dot"></span>
+                    <span>ログインは任意です。ログインしなくてもこれまで通りアプリをご利用いただけます。</span>
+                  </div>
+                  <div class="note-item">
+                    <span class="note-dot"></span>
+                    <span>Moodie Cloudをご利用いただくにはログインが必要です。</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card is-open" id="faq-4">
+          <button class="qa-question" onclick="toggleFaq('faq-4')" aria-expanded="true">
+            <span class="q-badge">Q</span>
+            <span class="q-text">購読するとどんなメリットがありますか？</span>
+            <svg class="q-arrow" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-divider"></div>
+            <div class="a-row">
+              <span class="a-badge">A</span>
+              <div class="a-content">
+                <div class="perk-grid">
+                  <div class="perk-item">
+                    <span class="perk-icon">⚡</span>
+                    <span class="perk-text">バックアップ＆復元が大幅にスピードアップ</span>
+                  </div>
+                  <div class="perk-item">
+                    <span class="perk-icon">💾</span>
+                    <span class="perk-text">Googleドライブへのバックアップが不要に</span>
+                  </div>
+                  <div class="perk-item">
+                    <span class="perk-icon">🔒</span>
+                    <span class="perk-text">Moodie Cloudサーバーに安全に保管</span>
+                  </div>
+                  <div class="perk-item">
+                    <span class="perk-icon">📱</span>
+                    <span class="perk-text">新しい端末でもすばやく復元</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="section-label">Moodieチームより</div>
+      <div class="bottom-notice">
+        <div class="notice-img-wrap">
+          <img src="kkobak-img.png" alt="Moodieチーム画像" style="display:none;" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" />
+          <span class="notice-img-placeholder" style="display:flex; align-items:center; justify-content:center; width:100%; height:100%;">画像<br/>差し替え</span>
+        </div>
+        <div>
+          <div class="notice-label">MOODIE TEAM</div>
+          <p class="notice-text">大切な日記は常に皆さんの端末に保存されています。Moodie Cloudは、より安心したい方のための選択肢です。これからもMoodieと一緒に毎日を記録していきましょう 💛</p>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+
+  </div><!-- /wrap -->
+
+
+  <script>
+    function setFaqHeight(item, open) {
+      const body = item.querySelector('.qa-answer');
+      if (open) {
+        body.style.maxHeight = body.scrollHeight + 'px';
+        item.classList.add('is-open');
+        item.querySelector('.qa-question').setAttribute('aria-expanded', 'true');
+        body.addEventListener('transitionend', function onEnd() {
+          if (item.classList.contains('is-open')) body.style.maxHeight = 'none';
+          body.removeEventListener('transitionend', onEnd);
+        });
+      } else {
+        body.style.maxHeight = body.scrollHeight + 'px';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            body.style.maxHeight = '0';
+          });
+        });
+        item.classList.remove('is-open');
+        item.querySelector('.qa-question').setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    function toggleFaq(id) {
+      const item = document.getElementById(id);
+      const isOpen = item.classList.contains('is-open');
+      setFaqHeight(item, !isOpen);
+    }
+
+    document.querySelectorAll('.qa-card.is-open').forEach(item => {
+      const body = item.querySelector('.qa-answer');
+      body.style.maxHeight = 'none';
+    });
+
+    function applyTweak(v, val) {
+      document.documentElement.style.setProperty(v, val);
+      window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { [v]: val } }, '*');
+    }
+
+    window.addEventListener('message', e => {
+      if (e.data?.type === '__activate_edit_mode')   document.getElementById('tweaks-panel').classList.add('is-visible');
+      if (e.data?.type === '__deactivate_edit_mode') document.getElementById('tweaks-panel').classList.remove('is-visible');
+    });
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+  </script>
+</body>
+</html>
