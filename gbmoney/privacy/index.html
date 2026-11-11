@@ -37,7 +37,7 @@
   <a href="/" class="back-btn">← 꼬박가계부</a>
   <div class="app-name">꼬박가계부 · CASOFT</div>
   <h1>개인정보처리방침</h1>
-  <div class="updated">최종 업데이트: 2026년 4월 15일</div>
+  <div class="updated">최종 업데이트: 2026년 11월 11일</div>
 </div>
 
 <div class="container">
@@ -50,19 +50,40 @@
     <h2>수집하는 정보</h2>
 
     <div class="card">
-      <h3>자동 수집 정보</h3>
+      <h3>계정 정보</h3>
+      <p>꼬박 클라우드 로그인 기능을 이용할 때만 수집됩니다. 로그인은 선택 사항입니다.</p>
       <ul>
-        <li>기기 ID (광고 게재 목적)</li>
-        <li>충돌 데이터 및 진단 정보</li>
-        <li>앱 사용 행동 분석 데이터 (Firebase Analytics)</li>
+        <li>이메일 주소</li>
+        <li>로그인 계정 식별자 (Apple / Google)</li>
+        <li>Google 로그인 시 Google 계정 이름</li>
       </ul>
     </div>
 
     <div class="card">
-      <h3>수집하지 않는 정보</h3>
+      <h3>가계부 데이터</h3>
+      <p>꼬박 클라우드에 로그인하고 동기화할 때 서버에 저장됩니다.</p>
       <ul>
-        <li>이름, 이메일 등 개인 식별 정보 (로그인 기능 없음)</li>
-        <li>가계부 데이터는 서버에 저장되지 않으며 기기 내에만 보관됩니다</li>
+        <li>가계부 내역 (날짜, 금액, 카테고리, 결제수단, 메모, 할부·반복 정보)</li>
+        <li>내 카테고리 및 카테고리 설정, 저축 계좌 및 저축 거래</li>
+        <li>내역에 첨부한 사진 (꼬박 클라우드 구독 시에만)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>구매 정보</h3>
+      <ul>
+        <li>꼬박 클라우드 구독 상태 및 만료일</li>
+        <li>광고 제거 이용권 구매 여부</li>
+      </ul>
+      <p style="margin-top: 8px;">결제는 Apple이 처리하며, 앱은 카드 번호 등 결제 수단 정보를 수집하지 않습니다.</p>
+    </div>
+
+    <div class="card">
+      <h3>기기 및 광고 정보</h3>
+      <ul>
+        <li>기기 ID (광고 게재 목적)</li>
+        <li>충돌 데이터 및 진단 정보</li>
+        <li>앱 사용 행동 분석 데이터 (Firebase Analytics)</li>
       </ul>
     </div>
   </div>
@@ -71,9 +92,12 @@
     <h2>정보 이용 목적</h2>
     <div class="card">
       <ul>
+        <li>꼬박 클라우드 동기화 제공 (여러 기기에서 같은 가계부 이용)</li>
+        <li>구독 및 구매 내역 확인·연동</li>
         <li>앱 서비스 개선 및 오류 수정</li>
         <li>맞춤형 광고 제공 (AdMob)</li>
         <li>앱 사용 통계 분석</li>
+        <li>사용자 문의 응대</li>
       </ul>
     </div>
   </div>
@@ -82,10 +106,11 @@
     <h2>데이터 저장 방식</h2>
     <div class="card">
       <ul>
-        <li>모든 가계부 데이터는 <strong>기기 내에만 저장</strong>됩니다.</li>
-        <li>iCloud 동기화 이용 시 Apple의 iCloud 서버에 저장됩니다.</li>
-        <li>구글 드라이브 백업 이용 시 Google Drive에 저장됩니다.</li>
-        <li>각 클라우드 서비스의 개인정보처리방침을 별도로 확인하시기 바랍니다.</li>
+        <li>로그인하지 않으면 가계부 데이터는 <strong>기기 내에만 저장</strong>되며 서버로 전송되지 않습니다.</li>
+        <li>꼬박 클라우드에 로그인하면 가계부 데이터가 Google Firebase(Cloud Firestore, Cloud Storage) 서버에 저장됩니다. 저장 위치는 Google Cloud 서울 리전입니다.</li>
+        <li>서버에 저장된 데이터는 전송 및 저장 시 암호화되며, 로그인한 본인 계정으로만 접근할 수 있습니다.</li>
+        <li>구글 드라이브 백업 이용 시 이용자의 Google Drive에 저장됩니다.</li>
+        <li>이전 버전에서 iCloud 동기화를 이용한 경우 해당 데이터는 이용자의 iCloud에 저장되어 있습니다. 꼬박 클라우드가 도입된 버전부터 iCloud 동기화는 제공되지 않습니다.</li>
       </ul>
     </div>
   </div>
@@ -100,7 +125,35 @@
     <div class="card">
       <h3>분석</h3>
       <span class="tag">Firebase Analytics</span>
-      <p style="margin-top: 8px;">앱 사용 패턴 분석을 위해 익명화된 행동 데이터를 수집합니다.</p>
+      <span class="tag">Firebase Crashlytics</span>
+      <p style="margin-top: 8px;">앱 사용 패턴 분석과 오류 수정을 위해 익명화된 행동 데이터와 충돌 정보를 수집합니다.</p>
+    </div>
+    <div class="card">
+      <h3>인증</h3>
+      <span class="tag">Sign in with Apple</span>
+      <span class="tag">Google Sign-In</span>
+      <span class="tag">Firebase Authentication</span>
+      <p style="margin-top: 8px;">꼬박 클라우드 로그인 기능 제공을 위해 사용됩니다.</p>
+    </div>
+    <div class="card">
+      <h3>클라우드 저장</h3>
+      <span class="tag">Google Firebase</span>
+      <p style="margin-top: 8px;">꼬박 클라우드 데이터 저장 및 구독 확인에 사용됩니다.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>개인정보의 국외 이전</h2>
+    <div class="card">
+      <p>꼬박 클라우드 로그인 시 계정 인증을 위해 아래와 같이 개인정보가 국외로 이전됩니다.</p>
+      <ul style="margin-top: 8px;">
+        <li>이전받는 자: Google LLC (Firebase Authentication)</li>
+        <li>이전 국가: 미국</li>
+        <li>이전 항목: 이메일 주소, 로그인 계정 식별자, Google 계정 이름(Google 로그인 시)</li>
+        <li>이전 시기 및 방법: 로그인 시 네트워크를 통해 전송</li>
+        <li>이용 목적: 로그인 및 계정 인증</li>
+        <li>보유 기간: 계정 삭제 시까지</li>
+      </ul>
     </div>
   </div>
 
@@ -108,8 +161,11 @@
     <h2>데이터 보관 및 삭제</h2>
     <div class="card">
       <ul>
-        <li>앱 삭제 시 기기 내 모든 데이터가 함께 삭제됩니다.</li>
-        <li>iCloud 또는 구글 드라이브 백업 데이터는 각 서비스에서 직접 삭제하실 수 있습니다.</li>
+        <li>기기 내 데이터는 앱 삭제 시 함께 삭제됩니다.</li>
+        <li>꼬박 클라우드 데이터와 계정 정보는 계정 삭제 시 함께 삭제됩니다.</li>
+        <li>계정 삭제는 앱 내 설정 → 꼬박 클라우드 계정 관리 → 계정 삭제에서 할 수 있습니다.</li>
+        <li>계정을 삭제해도 이 기기의 가계부 데이터는 그대로 남습니다.</li>
+        <li>구글 드라이브 백업 및 iCloud 데이터는 각 서비스에서 직접 삭제하실 수 있습니다.</li>
       </ul>
     </div>
   </div>
@@ -118,8 +174,9 @@
     <h2>이용자의 권리</h2>
     <div class="card">
       <ul>
+        <li>개인정보 열람, 수정, 삭제를 요청할 수 있습니다.</li>
+        <li>언제든지 앱 내에서 계정을 삭제할 수 있습니다.</li>
         <li>광고 추적은 기기 설정에서 제한할 수 있습니다.</li>
-        <li>앱 삭제를 통해 기기 내 모든 데이터를 삭제할 수 있습니다.</li>
       </ul>
     </div>
   </div>
